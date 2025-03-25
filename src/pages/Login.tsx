@@ -48,10 +48,10 @@ function Login() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center">
+    <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-sm bg-white p-8 rounded-lg shadow-lg">
+        className="w-11/12 max-w-sm bg-white p-8 rounded-lg shadow-lg">
         <h1 className="mb-6 w-full text-3xl font-bold tracking-wider text-center">
           Login
         </h1>
@@ -109,7 +109,7 @@ function Login() {
           </div>
         )}
       </form>
-    </div>
+    </>
   );
 }
 
