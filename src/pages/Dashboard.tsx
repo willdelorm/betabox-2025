@@ -55,7 +55,7 @@ function Dashboard() {
           </ul>
         </div>
       </main>
-      <Link to="/">
+      <Link to="/new-workout">
         <BtnFooter>Start a Session</BtnFooter>
       </Link>
     </>
