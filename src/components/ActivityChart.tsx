@@ -1,43 +1,64 @@
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
-  Legend,
+  // Legend,
+  ChartOptions,
 } from "chart.js";
 import type { ActivityData } from "../utils/activity.utils";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
-  Legend
+  // Legend
 );
 
-const ActivityChart = ({
-  activityData,
-}: { activityData: ActivityData[] }) => {
+const ActivityChart = ({ activityData }: { activityData: ActivityData[] }) => {
+  const primaryColor = getComputedStyle(document.documentElement)
+    .getPropertyValue("--color-primary")
+    .trim();
+  const primaryColorTransparent = `${primaryColor}60`; // Add 60 for transparency
+
   const chartData = {
     labels: activityData.map((item) => item.monthYear),
     datasets: [
       {
-        label: "Workouts Over Time",
+        label: "Total Workouts",
         data: activityData.map((item) => item.workoutCount),
-        fill: false,
-        borderColor: "rgba(75, 192, 192, 1)",
-        tension: 0.1,
+        backgroundColor: primaryColorTransparent,
+        borderColor: primaryColor,
+        borderWidth: 1,
       },
     ],
   };
 
-  return <Line data={chartData} />;
+  const chartOptions: ChartOptions<"bar"> = {
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: false,
+          text: "Workout Count",
+        },
+      },
+      x: {
+        reverse: true,
+        title: {
+          display: false,
+          text: "Month/Year",
+        },
+      },
+    },
+  };
+
+  return <Bar data={chartData} options={chartOptions} />;
 };
 
 export default ActivityChart;

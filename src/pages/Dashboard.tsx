@@ -24,27 +24,30 @@ function Dashboard() {
   return (
     <>
       <Nav />
-      <main className="flex-1">
+      <main className="flex-1 w-[95%] py-3">
         <h1 className="sr-only">Climbing Dashboard</h1>
 
         {/* Activity Over Time Chart */}
-        <div className="mb-12">
+        <div className="mb-6">
+          <h2 className="text-lg font-semibold mb-2">Activity</h2>
           <ActivityChart activityData={activityData} />
         </div>
 
         {/* Recent Workouts List */}
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold mb-4">Recent Workouts</h2>
-          <ul className="space-y-4">
+        <div>
+          <h2 className="text-lg font-semibold mb-2">Recent Workouts</h2>
+          <ul className="space-y-3">
             {allWorkouts.slice(0, 5).map((workout) => (
               <li
                 key={workout.id}
-                className="flex justify-between items-center border-b pb-4">
+                className="flex justify-between items-center border-b pb-2">
                 <div>
-                  <h3 className="font-medium text-xl">{workout.name}</h3>
-                  <p className="text-gray-500">
-                    {workout.type} -{" "}
-                    {new Date(workout.date ?? "").toLocaleDateString()}
+                  <h3 className="font-medium">
+                    {workout.name || workout.type}
+                  </h3>
+                  <p className="text-sm text-gray-500">
+                    {new Date(workout.date ?? "").toLocaleDateString()}{" "}
+                    {workout.duration && `- ${workout.duration}min`}
                   </p>
                 </div>
               </li>
